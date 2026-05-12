@@ -76,7 +76,9 @@
 
   <!-- PAGE HEADER -->
   <div class="page-header-img">
-    <img class="ph-bg" src="../Bilder/earth_team_7.jpg" alt="Hadean Ventures Team" style="object-position: center 20%;">
+    <video class="ph-bg" autoplay muted loop playsinline aria-label="Hadean Ventures Team">
+      <source src="../HadeanVideo/mountain.mp4" type="video/mp4">
+    </video>
     <div class="ph-overlay"></div>
     <div class="container">
       <span class="label">Our People</span>
@@ -359,6 +361,11 @@
   </footer>
 
   <script>
+    const teamHeroVideo = document.querySelector('.page-header-img .ph-bg');
+    if (teamHeroVideo && teamHeroVideo.tagName === 'VIDEO') {
+      teamHeroVideo.playbackRate = 1;
+    }
+
     const nav = document.getElementById('mainNav');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); });
     const toggle = document.getElementById('navToggle');
