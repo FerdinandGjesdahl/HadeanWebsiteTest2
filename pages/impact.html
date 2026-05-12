@@ -12,6 +12,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/main.css">
   <style>
+    .impact-page .page-header-img {
+      background-image: url('../Bilder/impact_2.jpg');
+      background-position: center 75%;
+      background-size: cover;
+    }
+
+    .impact-page .impact-hero-video {
+      object-position: center 75%;
+    }
+
     .impact-intro-section {
       padding: var(--section-py) 0 40px;
       background: var(--white);
@@ -349,6 +359,10 @@
         transform: none;
         transition: none;
       }
+
+      .impact-page .impact-hero-video {
+        display: none;
+      }
     }
 
     /* ── Responsive ── */
@@ -402,7 +416,9 @@
 
   <!-- PAGE HEADER -->
   <div class="page-header-img">
-    <img class="ph-bg" src="../Bilder/impact_2.jpg" alt="Hadean Ventures Impact">
+    <video class="ph-bg impact-hero-video" autoplay muted loop playsinline preload="metadata" poster="../Bilder/impact_2.jpg" aria-label="Hadean Ventures Impact">
+      <source src="../HadeanVideo/151296-800360307_tiny.mp4" type="video/mp4">
+    </video>
     <div class="ph-overlay"></div>
     <div class="container">
       <span class="label">The Hadean Impact</span>
