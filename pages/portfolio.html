@@ -113,6 +113,28 @@
       height: 520px;
       border-top: 1px solid var(--border-light);
     }
+
+    /* Stack the three filter dropdowns vertically on phones so nothing
+       overflows. Overrides the generic .portfolio-filters mobile rule in
+       main.css that switches to a horizontal scroll strip. */
+    @media (max-width: 768px) {
+      .portfolio-filters.portfolio-filters-dropdowns {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        overflow-x: visible;
+        align-items: stretch;
+        gap: 14px;
+        margin: 0 0 28px;
+        padding: 0;
+      }
+      .portfolio-filters.portfolio-filters-dropdowns .filter-dropdown-group {
+        width: 100%;
+      }
+      .portfolio-filters.portfolio-filters-dropdowns .filter-dropdown {
+        width: 100%;
+        min-width: 0;
+      }
+    }
   </style>
 </head>
 <body class="portfolio-page">
