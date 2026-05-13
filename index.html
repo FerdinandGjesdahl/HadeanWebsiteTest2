@@ -542,6 +542,7 @@
       const pausesOnHover = window.matchMedia('(hover: hover)').matches;
       let pointerDown = false;
       let dragging = false;
+      let capturedPointerId = null;
       let startX = 0;
       let startScrollLeft = 0;
       let lastFrameTime = performance.now();
@@ -581,12 +582,9 @@
 
         pointerDown = true;
         dragging = false;
+        capturedPointerId = null;
         startX = event.clientX;
         startScrollLeft = marqueeWrapper.scrollLeft;
-        marqueeWrapper.classList.add('is-dragging');
-        if (marqueeWrapper.setPointerCapture) {
-          marqueeWrapper.setPointerCapture(event.pointerId);
-        }
       });
 
       marqueeWrapper.addEventListener('pointermove', event => {
@@ -595,7 +593,15 @@
         const dragDistance = event.clientX - startX;
         if (Math.abs(dragDistance) < 4 && !dragging) return;
 
-        dragging = true;
+        if (!dragging) {
+          dragging = true;
+          marqueeWrapper.classList.add('is-dragging');
+          if (marqueeWrapper.setPointerCapture) {
+            capturedPointerId = event.pointerId;
+            marqueeWrapper.setPointerCapture(event.pointerId);
+          }
+        }
+
         event.preventDefault();
         setLoopedScroll(startScrollLeft - dragDistance);
       });
@@ -607,19 +613,24 @@
           suppressMarqueeClick = true;
           window.setTimeout(() => {
             suppressMarqueeClick = false;
-          }, 0);
+          }, 120);
         }
 
         pointerDown = false;
         dragging = false;
         marqueeWrapper.classList.remove('is-dragging');
-        if (marqueeWrapper.hasPointerCapture && marqueeWrapper.hasPointerCapture(event.pointerId)) {
-          marqueeWrapper.releasePointerCapture(event.pointerId);
+        if (
+          capturedPointerId !== null &&
+          marqueeWrapper.hasPointerCapture &&
+          marqueeWrapper.hasPointerCapture(capturedPointerId)
+        ) {
+          marqueeWrapper.releasePointerCapture(capturedPointerId);
         }
+        capturedPointerId = null;
       }
 
-      marqueeWrapper.addEventListener('pointerup', finishPointerScroll);
-      marqueeWrapper.addEventListener('pointercancel', finishPointerScroll);
+      window.addEventListener('pointerup', finishPointerScroll);
+      window.addEventListener('pointercancel', finishPointerScroll);
       marqueeWrapper.addEventListener('touchstart', () => {
         touchResumeTime = Number.POSITIVE_INFINITY;
       }, { passive: true });
