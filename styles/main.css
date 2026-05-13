@@ -2222,8 +2222,22 @@ body.js-scroll-animate .scroll-section.scroll-tilt {
 }
 
 .marquee-track-wrapper {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  touch-action: pan-y;
+}
+
+.marquee-track-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.marquee-track-wrapper.is-dragging {
+  cursor: grabbing;
 }
 
 .marquee-track-wrapper::before,
@@ -2251,16 +2265,7 @@ body.js-scroll-animate .scroll-section.scroll-tilt {
   display: flex;
   gap: 40px;
   width: max-content;
-  animation: marquee 48s linear infinite;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  user-select: none;
 }
 
 .marquee-item {
@@ -2271,6 +2276,10 @@ body.js-scroll-animate .scroll-section.scroll-tilt {
 
 .marquee-item[role='link'] {
   cursor: pointer;
+}
+
+.marquee-track-wrapper.is-dragging .marquee-item[role='link'] {
+  cursor: grabbing;
 }
 
 .marquee-item[role='link']:focus-visible {
@@ -2290,6 +2299,8 @@ body.js-scroll-animate .scroll-section.scroll-tilt {
   border: 2px solid var(--border-light);
   transition: border-color var(--transition), transform var(--transition);
   filter: grayscale(15%);
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .marquee-item:hover img {
