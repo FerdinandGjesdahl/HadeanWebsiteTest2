@@ -2229,7 +2229,7 @@ body.js-scroll-animate .scroll-section.scroll-tilt {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
-  touch-action: pan-y;
+  touch-action: pan-x pan-y;
 }
 
 .marquee-track-wrapper::-webkit-scrollbar {

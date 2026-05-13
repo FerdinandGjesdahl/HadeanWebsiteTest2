@@ -539,11 +539,13 @@
 
     if (marqueeWrapper && marqueeTrack) {
       const loopDuration = 48000;
+      const pausesOnHover = window.matchMedia('(hover: hover)').matches;
       let pointerDown = false;
       let dragging = false;
       let startX = 0;
       let startScrollLeft = 0;
       let lastFrameTime = performance.now();
+      let touchResumeTime = 0;
 
       const getLoopWidth = () => marqueeTrack.scrollWidth / 2;
 
@@ -571,7 +573,11 @@
       });
 
       marqueeWrapper.addEventListener('pointerdown', event => {
-        if (event.button !== 0) return;
+        if (event.pointerType === 'touch') {
+          touchResumeTime = Number.POSITIVE_INFINITY;
+          return;
+        }
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
 
         pointerDown = true;
         dragging = false;
@@ -614,12 +620,21 @@
 
       marqueeWrapper.addEventListener('pointerup', finishPointerScroll);
       marqueeWrapper.addEventListener('pointercancel', finishPointerScroll);
+      marqueeWrapper.addEventListener('touchstart', () => {
+        touchResumeTime = Number.POSITIVE_INFINITY;
+      }, { passive: true });
+      marqueeWrapper.addEventListener('touchend', () => {
+        touchResumeTime = performance.now() + 450;
+      }, { passive: true });
+      marqueeWrapper.addEventListener('touchcancel', () => {
+        touchResumeTime = performance.now() + 450;
+      }, { passive: true });
 
       function autoScrollMarquee(now) {
         const elapsed = now - lastFrameTime;
         lastFrameTime = now;
 
-        if (!pointerDown && !marqueeWrapper.matches(':hover')) {
+        if (!pointerDown && now >= touchResumeTime && (!pausesOnHover || !marqueeWrapper.matches(':hover'))) {
           const loopWidth = getLoopWidth();
           setLoopedScroll(marqueeWrapper.scrollLeft + (loopWidth * elapsed / loopDuration));
         }
