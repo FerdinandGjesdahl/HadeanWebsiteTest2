@@ -29,7 +29,7 @@
       background-position: center center;
       background-size: cover;
     }
-    .inv-hero-video {
+    .inv-hero-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -163,9 +163,6 @@
       .inv-chart-name { font-size: 0.58rem; }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .inv-hero-video { display: none; }
-    }
   </style>
 </head>
 <body>
@@ -197,9 +194,7 @@
   <!-- HERO TEXT + CHARTS -->
   <section class="inv-hero">
     <div class="inv-hero-bg">
-      <video class="inv-hero-video" autoplay muted loop playsinline preload="metadata" poster="../hadean_images/investors-hero-2026.jpg">
-        <source src="../HadeanVideo/91744-636709154_medium.mp4" type="video/mp4">
-      </video>
+      <img class="inv-hero-image" src="../hadean_images/investors-hero-2026.jpg" alt="Hadean Ventures investors" decoding="async" fetchpriority="high">
     </div>
     <div class="inv-hero-overlay"></div>
     <div class="container inv-hero-content" style="padding-top: var(--nav-height);">

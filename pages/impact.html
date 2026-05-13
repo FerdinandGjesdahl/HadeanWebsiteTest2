@@ -18,9 +18,16 @@
       background-size: cover;
     }
 
-    .impact-page .impact-hero-video {
+    .impact-page .page-header-img .impact-hero-image {
       object-fit: cover;
-      object-position: center top;
+      object-position: center 78%;
+    }
+
+    .impact-page .page-header-img .ph-overlay {
+      background: linear-gradient(150deg,
+        rgba(15, 30, 53, 0.58) 0%,
+        rgba(33, 66, 116, 0.38) 60%,
+        rgba(63, 90, 131, 0.28) 100%);
     }
 
     .impact-intro-section {
@@ -361,9 +368,6 @@
         transition: none;
       }
 
-      .impact-page .impact-hero-video {
-        display: none;
-      }
     }
 
     /* ── Responsive ── */
@@ -417,9 +421,7 @@
 
   <!-- PAGE HEADER -->
   <div class="page-header-img">
-    <video class="ph-bg impact-hero-video" autoplay muted loop playsinline preload="metadata" poster="../Bilder/impact_2.jpg" aria-label="Hadean Ventures Impact">
-      <source src="../HadeanVideo/151296-800360307_tiny.mp4" type="video/mp4">
-    </video>
+    <img class="ph-bg impact-hero-image" src="../Bilder/impact_2.jpg" alt="Hadean Ventures Impact" decoding="async" fetchpriority="high">
     <div class="ph-overlay"></div>
     <div class="container">
       <span class="label">The Hadean Impact</span>
