@@ -106,14 +106,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
     }
     .inv-chart-ring {
       position: relative;
       width: 120px;
       height: 120px;
+      aspect-ratio: 1;
     }
     .inv-chart-ring svg {
+      width: 100%;
+      height: 100%;
+      display: block;
       transform: rotate(-90deg);
     }
     .inv-chart-pct {
@@ -126,6 +130,7 @@
       font-weight: 300;
       color: #ffffff;
       letter-spacing: -0.02em;
+      line-height: 1;
     }
     .inv-chart-name {
       font-size: 0.65rem;
@@ -133,6 +138,8 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: rgba(191,220,236,0.7);
+      text-align: center;
+      line-height: 1.3;
     }
 
     /* progress ring animation */
@@ -156,13 +163,67 @@
       from { stroke-dasharray: 0 289.0; }
     }
 
-    @media (max-width: 600px) {
-      .inv-charts { gap: 20px; }
-      .inv-chart-ring { width: 90px; height: 90px; }
-      .inv-chart-pct { font-size: 1.2rem; }
-      .inv-chart-name { font-size: 0.58rem; }
+    /* ── Responsive: tablets and phones ── */
+    @media (max-width: 768px) {
+      .inv-hero {
+        min-height: auto;
+        padding-top: calc(var(--nav-height) + 56px);
+        padding-bottom: 56px;
+      }
+      .inv-hero-text {
+        font-size: 1.02rem;
+        line-height: 1.6;
+        padding: 0 4px;
+      }
+      .inv-charts-hero {
+        margin-top: 44px;
+      }
+      .inv-charts {
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        justify-content: center;
+        gap: 36px 44px;
+      }
+      .inv-chart-item {
+        gap: 18px;
+      }
+      .inv-chart-ring {
+        width: 100px;
+        height: 100px;
+      }
+      .inv-chart-pct {
+        font-size: 1.3rem;
+      }
+      .inv-chart-name {
+        font-size: 0.6rem;
+      }
+      .inv-contact-hero {
+        margin-top: 48px;
+      }
+      .inv-contact-hero p,
+      .inv-contact-hero a {
+        font-size: 0.88rem;
+      }
+      .inv-contact-hero a {
+        overflow-wrap: anywhere;
+      }
     }
 
+    @media (max-width: 430px) {
+      .inv-charts {
+        gap: 30px 28px;
+      }
+      .inv-chart-item {
+        gap: 16px;
+      }
+      .inv-chart-ring {
+        width: 92px;
+        height: 92px;
+      }
+      .inv-chart-pct {
+        font-size: 1.2rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -205,7 +266,7 @@
         <div class="inv-charts">
           <div class="inv-chart-item">
             <div class="inv-chart-ring">
-              <svg viewBox="0 0 120 120" width="120" height="120">
+              <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                 <circle class="ring-track" cx="60" cy="60" r="46"/>
                 <circle class="ring-arc" cx="60" cy="60" r="46"
                   stroke-dasharray="124.3 289.0"/>
@@ -216,7 +277,7 @@
           </div>
           <div class="inv-chart-item">
             <div class="inv-chart-ring">
-              <svg viewBox="0 0 120 120" width="120" height="120">
+              <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                 <circle class="ring-track" cx="60" cy="60" r="46"/>
                 <circle class="ring-arc" cx="60" cy="60" r="46"
                   stroke-dasharray="60.7 289.0"/>
@@ -227,7 +288,7 @@
           </div>
           <div class="inv-chart-item">
             <div class="inv-chart-ring">
-              <svg viewBox="0 0 120 120" width="120" height="120">
+              <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                 <circle class="ring-track" cx="60" cy="60" r="46"/>
                 <circle class="ring-arc" cx="60" cy="60" r="46"
                   stroke-dasharray="78.0 289.0"/>
@@ -238,7 +299,7 @@
           </div>
           <div class="inv-chart-item">
             <div class="inv-chart-ring">
-              <svg viewBox="0 0 120 120" width="120" height="120">
+              <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
                 <circle class="ring-track" cx="60" cy="60" r="46"/>
                 <circle class="ring-arc" cx="60" cy="60" r="46"
                   stroke-dasharray="26.0 289.0"/>
